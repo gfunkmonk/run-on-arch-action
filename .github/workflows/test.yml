@@ -263,4 +263,4 @@ jobs:
         shebang="${{ steps.build_custom_shell.outputs.shebang }}"
 
         echo "Assert shebang: '$shebang' == '#!/bin/dash'"
-        test "$shebang" == "#!/bin/dash"
+        test "$shebang" == "#!/bin/dash" 
