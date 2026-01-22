@@ -1,0 +1,20 @@
+FROM amd64/alpine:latest
+
+COPY ./run-on-arch-install.sh /root/run-on-arch-install.sh
+RUN chmod +x /root/run-on-arch-install.sh && /root/run-on-arch-install.sh
+
+RUN apk update && apk add curl ca-certificates
+
+ENV TOOLCHAIN_DIR=/opt/mipsel-linux-muslsf-cross
+ENV TOOLCHAIN_TGZ=mipsel-linux-muslsf-cross.tgz
+
+# Download and extract the musl toolchain
+RUN curl -O https://musl.cc && \
+    tar xzf $TOOLCHAIN_TGZ -C /opt/ && \
+    rm $TOOLCHAIN_TGZ
+
+# Add the toolchain bin directory to the PATH
+ENV PATH=$PATH:$TOOLCHAIN_DIR/bin
+
+ENV CC=mipsel-linux-muslsf-gcc
+ENV CXX=mipsel-linux-muslsf-g++

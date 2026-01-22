@@ -1,4 +1,4 @@
-FROM --platform=linux/arm/v7 agners/archlinuxarm-arm32v7:latest
+FROM gmao/centos7-gcc
 
 COPY ./run-on-arch-install.sh /root/run-on-arch-install.sh
 RUN chmod +x /root/run-on-arch-install.sh && /root/run-on-arch-install.sh
