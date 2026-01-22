@@ -6,19 +6,13 @@ set -euo pipefail
 DOCKERFILE=$1
 CONTAINER_NAME=$2
 # Remainder of args get passed to docker
-#declare -a DOCKER_RUN_ARGS=${@:3:${#@}}
-declare -a DOCKER_RUN_ARGS=${@:4:${#@}}
+declare -a DOCKER_RUN_ARGS=${@:3:${#@}}
 
 # Defaults
 ACTION_DIR="$(cd "$(dirname "$0")"/.. >/dev/null 2>&1 ; pwd -P)"
 LOWERCASE_REPOSITORY=$(printf "%s" "$GITHUB_REPOSITORY" | tr '[:upper:]' '[:lower:]')
 PACKAGE_REGISTRY="ghcr.io/${LOWERCASE_REPOSITORY}/${CONTAINER_NAME}"
 DEBIAN_FRONTEND=noninteractive
-
-# Sanitize inputs
-if [[ "$ARCH" == "none" ]]; then
-  ARCH=amd64
-fi
 
 show_build_log_and_exit () {
   # Show build-log.text output and exit if passed exit status != 0
@@ -56,7 +50,6 @@ build_container () {
   then
     docker build \
       "${ACTION_DIR}/Dockerfiles" \
-      --platform=linux/$ARCH \
       --file "$DOCKERFILE" \
       --tag "${CONTAINER_NAME}:latest"
   else
