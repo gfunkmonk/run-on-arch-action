@@ -1,27 +1,5 @@
 # Use a minimal Alpine Linux image as the base
-FROM amd64/alpine:latest AS builder
+FROM gfunkmonk1/mipsel-alpine:latest
 
 COPY ./run-on-arch-install.sh /root/run-on-arch-install.sh
 RUN chmod +x /root/run-on-arch-install.sh && /root/run-on-arch-install.sh
-
-# Install necessary dependencies to download and extract the toolchain
-RUN apk update && apk add --no-cache curl tar xz wget
-
-# Define the MIPS target and the toolchain URL
-ENV TARGET=mipsel-linux-muslsf
-ENV TOOLCHAIN_URL=https://musl.cc/mipsel-linux-muslsf-cross.tgz
-
-# Create a directory for the toolchain and download/extract it
-WORKDIR /cross
-
-RUN wget --no-check-certificate  $TOOLCHAIN_URL | tar xzf - --strip-components=1
-
-# Add the toolchain to the PATH environment variable
-ENV PATH="/cross/bin:${PATH}"
-
-# Set the cross-compiler prefix for convenience
-ENV CROSS_COMPILE=$TARGET-
-
-ENV CFLAGS="-Os -target mipsel-linux-muslsf"
-ENV CC="mipsel-linux-muslsf-gcc"
-ENV CXX="mipsel-linux-muslsf-g++"
