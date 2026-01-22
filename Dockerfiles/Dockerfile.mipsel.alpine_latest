@@ -1,7 +1,20 @@
 # Use a minimal Alpine Linux image as the base
-FROM gfunkmonk1/mipsel-alpine:latest
+#FROM gfunkmonk1/mipsel-alpine:latest
+FROM retu2libc/mipsel-linux-muslsf:1.1.16
 
 COPY ./run-on-arch-install.sh /root/run-on-arch-install.sh
 RUN chmod +x /root/run-on-arch-install.sh && /root/run-on-arch-install.sh
 
 ADD ./upx/mipsel/upx /usr/local/bin/
+
+ENV PATH=/opt/mipsel-linux-muslsf/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+ENV ARCH=mipsel
+ENV HOME=/root
+ENV FC=mipsel-linux-muslsf-gfortran
+ENV CPP=mipsel-linux-muslsf-cpp
+ENV AS=mipsel-linux-muslsf-as
+ENV LD=mipsel-linux-muslsf-ld
+ENV CC=mipsel-linux-muslsf-gcc
+ENV CXX=mipsel-linux-muslsf-gcc
+ENV CROSS_COMPILE=mipsel-linux-muslsf-
+ENV CROSS_TRIPLE=mipsel-linux-muslsf
