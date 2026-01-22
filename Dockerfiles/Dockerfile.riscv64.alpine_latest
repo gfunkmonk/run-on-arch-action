@@ -1,4 +1,4 @@
-FROM riscv64/alpine
+FROM alpine@sha256:6b283ad1125de2c183bcff24bc68f96eb034d09dd3ee56b8c7ba7dc832e5c1e7
 
 COPY ./run-on-arch-install.sh /root/run-on-arch-install.sh
 RUN chmod +x /root/run-on-arch-install.sh && /root/run-on-arch-install.sh
