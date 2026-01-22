@@ -2,3 +2,6 @@ FROM --platform=linux/arm64 arm64v8/alpine:latest
 
 COPY ./run-on-arch-install.sh /root/run-on-arch-install.sh
 RUN chmod +x /root/run-on-arch-install.sh && /root/run-on-arch-install.sh
+
+RUN curl -O https://github.com/upx/upx/releases/download/v5.1.0/upx-5.1.0-arm64_linux.tar.xz && tar -xzfJ upx-5.1.0-arm64_linux.tar.xz upx-5.1.0-amd64_linux/upx -C /usr/local/bin/upx && chmod 777 /usr/local/bin/upx
+
