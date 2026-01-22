@@ -5,7 +5,7 @@ COPY ./run-on-arch-install.sh /root/run-on-arch-install.sh
 RUN chmod +x /root/run-on-arch-install.sh && /root/run-on-arch-install.sh
 
 # Install necessary dependencies to download and extract the toolchain
-RUN apk update && apk add --no-cache curl tar xz
+RUN apk update && apk add --no-cache curl tar xz wget
 
 # Define the MIPS target and the toolchain URL
 ENV TARGET=mipsel-linux-muslsf
@@ -14,7 +14,7 @@ ENV TOOLCHAIN_URL=https://musl.cc/mipsel-linux-muslsf-cross.tgz
 # Create a directory for the toolchain and download/extract it
 WORKDIR /cross
 
-RUN curl -sL $TOOLCHAIN_URL | tar xzf - --strip-components=1
+RUN wget --no-check-certificate  $TOOLCHAIN_URL | tar xzf - --strip-components=1
 
 # Add the toolchain to the PATH environment variable
 ENV PATH="/cross/bin:${PATH}"
