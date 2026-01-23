@@ -5,7 +5,8 @@ FROM retu2libc/mipsel-linux-muslsf:1.1.16
 COPY ./run-on-arch-install.sh /root/run-on-arch-install.sh
 RUN chmod +x /root/run-on-arch-install.sh && /root/run-on-arch-install.sh
 
-ADD ./upx/mipsel/upx /usr/local/bin/
+#ADD ./upx/mipsel/upx /usr/local/bin/
+ADD ./upx/amd64/upx /usr/local/bin/
 
 ENV PATH=/opt/mipsel-linux-muslsf/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
 ENV ARCH=mipsel
