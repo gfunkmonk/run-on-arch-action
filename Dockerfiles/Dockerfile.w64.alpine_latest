@@ -1,0 +1,9 @@
+# Use a minimal Alpine Linux image as the base
+#FROM gfunkmonk1/mipsel-alpine:latest
+FROM gfunkmonk1/w64-alpine:latest
+
+COPY ./run-on-arch-install.sh /root/run-on-arch-install.sh
+RUN chmod +x /root/run-on-arch-install.sh && /root/run-on-arch-install.sh
+
+#ADD ./upx/mipsel/upx /usr/local/bin/
+ADD ./upx/amd64/upx /usr/local/bin/
