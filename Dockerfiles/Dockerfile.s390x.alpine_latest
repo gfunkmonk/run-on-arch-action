@@ -2,3 +2,5 @@ FROM --platform=linux/s390x s390x/alpine:latest
 
 COPY ./run-on-arch-install.sh /root/run-on-arch-install.sh
 RUN chmod +x /root/run-on-arch-install.sh && /root/run-on-arch-install.sh
+
+ADD ./upx/s390x/upx /usr/local/bin/
