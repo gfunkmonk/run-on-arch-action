@@ -7,3 +7,6 @@ RUN chmod +x /root/run-on-arch-install.sh && /root/run-on-arch-install.sh
 
 #ADD ./upx/mipsel/upx /usr/local/bin/
 ADD ./upx/amd64/upx /usr/local/bin/
+
+ENV CC="x86_64-w64-mingw32-gcc -std=c89"
+ENV CXX="x86_64-w64-mingw32-g++ -std=c89"
